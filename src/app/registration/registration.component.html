@@ -1,232 +1,109 @@
 <div class="container">
-    <div class="text-right">
+  <h1 class="text-center pt-2">The Playlists</h1>
+  <p class="text-center mb-4">Here you can create your own playlist, edit your already existing playlist, add songs, and show it to the world!</p>
+    <div class="text-left pt-4">
         <button type="submit" class="btn btn-primary" (click)="onNew()">
-          New Employee
+          <i class="fa fa-list-ul"></i> New Playlist
         </button>
       </div>
       <br>
   <div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
 
-          <th>First Name</th>
-
-          <th>Last Name</th>
-
-          <th>DOB</th>
-
-          <th>DOJ</th>
-
-          <th>Email</th>
-
-          <th>Company</th>
-
-          <th></th>
-
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let registration of registrations; let i = index">
-          <th scope="row">{{ i + 1 }}</th>
-
-          <td>{{ registration.firstName }}</td>
-
-          <td>{{ registration.lastName }}</td>
-
-          <td>
-            {{
-              registration.dob.day +
-                "/" +
-                registration.dob.month +
-                "/" +
-                registration.dob.year
-            }}
-          </td>
-
-          <td>
-            {{
-              registration.doj.day +
-                "/" +
-                registration.doj.month +
-                "/" +
-                registration.doj.year
-            }}
-          </td>
-
-          <td>{{ registration.email }}</td>
-
-          <td>{{ registration.company }}</td>
-
-          <td>
-            <button type="button" class="btn btn-info" (click)="onEdit(i)">
-              Edit
-            </button>
-          </td>
-
-          <td>
-            <button type="button" class="btn btn-danger" (click)="onDelete(i)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- <div class="text-right">
-      <button type="submit" class="btn btn-primary" (click)="onNew()">
-        New
-      </button>
-    </div> -->
-  </div>
-  <div class="regentry" *ngIf="showNew">
-    <form (ngSubmit)="onSave()">
-      <div class="form-group row">
-        <label for="firstname-input" class="col-2 col-form-label"
-          >First Name</label
-        >
-
-        <div class="col-10">
-          <input
-            class="form-control"
-            type="text"
-            [(ngModel)]="regModel.firstName"
-            name="firstName"
-          />
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="lastname-input" class="col-2 col-form-label"
-          >Last Name</label
-        >
-
-        <div class="col-10">
-          <input
-            class="form-control"
-            type="text"
-            [(ngModel)]="regModel.lastName"
-            name="lastName"
-          />
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="dob-input" class="col-2 col-form-label">DOB</label>
-
-        <div class="col-3 input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="yyyy-mm-dd"
-            name="dob"
-            [(ngModel)]="regModel.dob"
-            ngbDatepicker
-            #dob="ngbDatepicker"
-          />
-
-          <button
-            class="input-group-addon"
-            (click)="dob.toggle()"
-            type="button"
-          >
-            <img
-              src="assets/img/calendar-icon.svg"
-              style="width: 1.2rem; height: 1rem; cursor: pointer;"
+    <!-- Add new Playlist -->
+    <div class="regentry" *ngIf="showNew">
+      <form (ngSubmit)="onSave()">
+        <div class="form-group row">
+          <label for="playlistname-input" class="col-2 col-form-label">Playlist Name *</label>
+  
+          <div class="col-10">
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="regModel.playlistName"
+              name="playlistName"
             />
-          </button>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="dob-input" class="col-2 col-form-label">DOJ</label>
-
-        <div class="col-3 input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="yyyy-mm-dd"
-            name="doj"
-            [(ngModel)]="regModel.doj"
-            ngbDatepicker
-            #doj="ngbDatepicker"
-          />
-
-          <button
-            class="input-group-addon"
-            (click)="doj.toggle()"
-            type="button"
-          >
-            <img
-              src="assets/img/calendar-icon.svg"
-              style="width: 1.2rem; height: 1rem; cursor: pointer;"
-            />
-          </button>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="example-email-input" class="col-2 col-form-label">Email</label>
-
-        <div class="col-10">
-          <input
-            class="form-control"
-            type="email"
-            [(ngModel)]="regModel.email"
-            name="email"/>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="example-password-input" class="col-2 col-form-label"
-          >Password</label>
-
-        <div class="col-10">
-          <input
-            class="form-control"
-            type="password"
-            [(ngModel)]="regModel.password"
-            name="password"/>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="city-input" class="col-2 col-form-label">Company</label>
-
-        <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            id="dropdownManual"
-            name="company"
-            ngbDropdownToggle
-          >
-            {{ regModel.company }}
-          </button>
-
-          <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button
-              type="button"
-              class="dropdown-item"
-              *ngFor="let company of companies"
-              (click)="onChangeCompany(company)"
-            >
-              {{ company }}
-            </button>
           </div>
         </div>
+
+        <div class="form-group row">
+          <label for="example-description-input" class="col-2 col-form-label">Description *</label>
+  
+          <div class="col-10">
+            <textarea class="form-control" [(ngModel)]="regModel.description" name="description"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="songTitle-input" class="col-2 col-form-label">Song Title *</label>
+  
+          <div class="col-10">
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="regModel.songTitle"
+              name="songTitle"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="songTitle-input" class="col-2 col-form-label">Artist *</label>
+  
+          <div class="col-10">
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="regModel.artist"
+              name="artist"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="songTitle-input" class="col-2 col-form-label">Duration *</label>
+  
+          <div class="col-5 input-group mb-3">
+            <input
+              class="form-control"
+              type="number"
+              [(ngModel)]="regModel.duration"
+              name="duration"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">Minutes</span>
+            </div>
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-success mr-3"><i class="far fa-save"></i> {{ submitType }}</button>
+  
+        <button type="submit" class="btn btn-danger" (click)="onCancel()">
+          <i class="far fa-window-close"></i> Cancel
+        </button>
+      </form>
+      <br>
+    </div>
+
+    <div class="card w-100 mb-3" style="width: 18rem;" *ngFor="let registration of registrations; let i = index">
+      <div class="card-body">
+        <h4 class="card-title">{{ registration.playlistName }}</h4>
+        <p class="card-subtitle mb-2 text-muted">Total - Songs, {{ registration.duration }} Minutes</p>
+        <h6 class="card-text">{{ registration.description }}.</h6><hr>
+        <table>
+          <tr style="font-size:24px;">
+            <td class="pr-3"><i class="fa fa-play-circle"></i> </td>
+            <td>
+              {{ registration.songTitle }} <br>
+              <span style="font-size:16px;">by {{ registration.artist }} • {{ registration.duration }} Minutes </span>
+            </td>
+          </tr>
+        </table><br>
+        <button type="button" class="btn btn-danger mr-3" (click)="onDelete(i)"><i class="fa fa-trash"></i> Delete</button>
+        <button type="button" class="btn btn-info mr-3" (click)="onEdit(i)"><i class="fas fa-pencil-alt"></i> Edit</button>
       </div>
-
-      <button type="submit" class="btn btn-success">{{ submitType }}</button>
-
-      <button type="submit" class="btn btn-primary" (click)="onCancel()">
-        Cancel
-      </button>
-    </form>
+    </div>
   </div>
+  
 
   <br />
 </div>
