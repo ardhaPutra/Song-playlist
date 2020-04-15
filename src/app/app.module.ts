@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [],
